@@ -6,7 +6,7 @@ using System.Web;
 
 namespace OVOExcercise
 {
-    public class Customer
+    public class CustomerAttributes
     {
         public string id { get; set; }
         public string firstName { get; set; }
@@ -16,9 +16,9 @@ namespace OVOExcercise
     }
 
     [DataContract]
-    public class Customers
+    public class Customer
     {
         [DataMember]
-        public List<Customer> customers { get; set; }
+        public CustomerAttributes customer { get; set; }
     }
 }

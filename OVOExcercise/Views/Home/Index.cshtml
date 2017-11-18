@@ -14,16 +14,30 @@
 	<h2>Index</h2>
 </head>
 <body>
+	<div>
 	@Html.Grid(Model.Customers).Columns(columns =>
-	{
-		columns.Add(c => c.id).Titled("Client ID");
-		columns.Add(c => c.firstName).Titled("First Name");
-		columns.Add(c => c.lastName).Titled("Last Name");
-		columns.Add(c => c.gender).Titled("Gender");
-		columns.Add(c => c.title).Titled("Title");
+{
+	columns.Add(c => c.id).Titled("Client ID");
+	columns.Add(c => c.firstName).Titled("First Name");
+	columns.Add(c => c.lastName).Titled("Last Name");
+	columns.Add(c => c.gender).Titled("Gender");
+	columns.Add(c => c.title).Titled("Title");
 
-	}).WithPaging(3).Sortable(true)
-
-
-</body>
+}).WithPaging(3).Sortable(true)
+		
+@using (Html.BeginForm("Index", "Home", FormMethod.Post))
+{
+	<fieldset>
+		<div class="editor-label">
+			@Html.Label("Please enter the Id of the Customer you would like to search for:")
+		</div>
+		<div class="editor-field">
+			@Html.TextBoxFor(m => m.Id)
+		</div>
+		<p>
+			<input type="submit" value="Search"/>
+		</p>
+	</fieldset>
+}
+	</body>
 </html>

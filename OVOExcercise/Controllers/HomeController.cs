@@ -17,24 +17,42 @@ namespace OVOExcercise.Controllers
         static string url = "https://sheltered-depths-66346.herokuapp.com/";
 
         static WebClient syncClient = new WebClient();
+
+        List<CustomerAttributes> customerList;
+
         // GET: Home
         public ActionResult Index()
         {
             //using the WebClient to get the JSON data
             var content = syncClient.DownloadString(url + "customers");
 
-            List<Customer> customerList;
-
-            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Customers));
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(AllCustomers));
             using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(content)))
             {
-                var customerData = (Customers)serializer.ReadObject(ms);
+                var customerData = (AllCustomers)serializer.ReadObject(ms);
                 customerList = customerData.customers;
             }
 
-            HomeViewModel vm = new HomeViewModel(customerList);
+            HomeViewModel vm = new HomeViewModel() { Customers = customerList };
          
             return View(vm);
+        }
+
+        [HttpPost]
+        public ActionResult Index(HomeViewModel model)
+        {
+            var content = syncClient.DownloadString(url + "customer?id=" + model.Id);
+
+            DataContractJsonSerializer serializer = new DataContractJsonSerializer(typeof(Customer));
+            using (var ms = new MemoryStream(Encoding.Unicode.GetBytes(content)))
+            {
+                var customerData = (Customer)serializer.ReadObject(ms);
+                customerList = new List<CustomerAttributes>();
+                customerList.Add(customerData.customer);
+            }
+            
+
+            return View(new HomeViewModel() { Customers = customerList });
         }
     }
 }

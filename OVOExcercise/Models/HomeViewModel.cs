@@ -7,13 +7,8 @@ namespace OVOExcercise.Models
 {
     public class HomeViewModel
     {
-        public List<Customer> Customers { get; private set; }
-        public string Id { get; set; }
-
-        public HomeViewModel(List<Customer> customers)
-        {
-            Customers = customers;
-        }
+        public List<CustomerAttributes> Customers { get;  set; }
+        public string Id { get;   set; }
 
 
     }
