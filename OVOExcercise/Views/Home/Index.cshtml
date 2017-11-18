@@ -1,0 +1,29 @@
+﻿@model OVOExcercise.Models.HomeViewModel
+@using GridMvc.Html
+@{
+    ViewBag.Title = "Index";
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+	<link href="@Url.Content("~/Content/Gridmvc.css")" rel="stylesheet" />
+	<script src="@Url.Content("~/Scripts/gridmvc.min.js")"></script>
+
+	<h2>Index</h2>
+</head>
+<body>
+	@Html.Grid(Model.Customers).Columns(columns =>
+	{
+		columns.Add(c => c.id).Titled("Client ID");
+		columns.Add(c => c.firstName).Titled("First Name");
+		columns.Add(c => c.lastName).Titled("Last Name");
+		columns.Add(c => c.gender).Titled("Gender");
+		columns.Add(c => c.title).Titled("Title");
+
+	}).WithPaging(3).Sortable(true)
+
+
+</body>
+</html>
