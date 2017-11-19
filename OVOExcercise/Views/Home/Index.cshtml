@@ -28,6 +28,7 @@
 @using (Html.BeginForm("Index", "Home", FormMethod.Post))
 {
 	<fieldset>
+        @Html.ValidationSummary()
 		<div class="editor-label">
 			@Html.Label("Please enter the Id of the Customer you would like to search for:")
 		</div>
